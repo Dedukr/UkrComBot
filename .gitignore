@@ -4,6 +4,7 @@
 .DS_Store
 config.py
 log.txt
+tickets.py
 
 
 __pycache__/
