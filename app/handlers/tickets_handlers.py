@@ -1,12 +1,13 @@
 from aiogram import Router, F
 from aiogram.types import Message, LabeledPrice, CallbackQuery, PreCheckoutQuery
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
-import tickets, config, logging, random
+import logging, random
+import config, tickets
 
-from main2 import bot
+from main import bot
 import app.keyboards as kb
 
 # Router for ticket purchase
@@ -98,7 +99,6 @@ async def successful_payment(message: Message):
 	logging.info(f"SUCCESSFUL PAYMENT: {message.successful_payment}")
 	email = message.successful_payment.order_info.email
 	purchased_quantity = int(message.successful_payment.invoice_payload.split(":")[-1])
-	print(purchased_quantity)
 	await bot.send_message(
 		config.ADMIN,
 		f"@{message.from_user.username} ({message.from_user.full_name})\n{email}\nBought {purchased_quantity} ticket(s)!"
