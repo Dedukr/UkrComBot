@@ -5,6 +5,7 @@
 config.py
 log.txt
 tickets.py
+main2.py
 
 
 __pycache__/
