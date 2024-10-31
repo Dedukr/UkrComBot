@@ -55,6 +55,9 @@ async def book_attendance(callback: CallbackQuery):
 	await rq.add_participant(event_id)
 	await callback.message.bot.send_message(config.ADMIN,
 	                                        f"@{callback.from_user.username} ({callback.from_user.full_name})\nBooked a ticket for {event.name}!")
+	with open(f"{event.name}.log", "a") as f:
+		f.write(f"{callback.message.date} - {callback.from_user.username} booked\n")
+		f.flush()
 
 
 # async def buy(message: Message, state: FSMContext):
