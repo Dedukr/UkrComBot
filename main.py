@@ -1,21 +1,23 @@
-import asyncio
+import asyncio, stripe
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
 import config, logging
 from app.handlers import tickets_handlers
 from app.handlers import handlers
-
-# Initialize bot, dispatcher, and routers
-bot = Bot(config.TOKEN)
-dp = Dispatcher(storage=MemoryStorage())
-
-logging.basicConfig(level=logging.INFO)
-
+from app.database.models import asyncmain
 
 # Main function to start the bot
 async def main():
+	await asyncmain()
+	# Initialize bot, dispatcher, and routers
+	bot = Bot(config.TOKEN)
+	dp = Dispatcher(storage=MemoryStorage())
 	try:
+
+		logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+		stripe.api_key = config.STRIPE_API
 		# Include ticket-related router
 		dp.include_router(tickets_handlers.ticket_router)
 		# Include the router in the dispatcher
