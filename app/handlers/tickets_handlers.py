@@ -59,6 +59,7 @@ async def book_attendance(callback: CallbackQuery):
 		f.write(f"{callback.message.date} - {callback.from_user.username} booked\n")
 		f.flush()
 
+	await callback.message.answer("Успішно заброньовано✅\nЗустрінемось на івенті!")
 
 # async def buy(message: Message, state: FSMContext):
 # 	if tickets.available_tickets == 0:
