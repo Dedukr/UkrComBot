@@ -55,7 +55,7 @@ async def book_attendance(callback: CallbackQuery):
 	await rq.add_participant(event_id)
 	await callback.message.bot.send_message(config.ADMIN,
 	                                        f"{callback.message.date.strftime('%m/%d/%Y, %H:%M:%S')} - @{callback.from_user.username} {callback.from_user.full_name} ({callback.from_user.id})\nBooked a ticket for {event.name}!")
-	with open(f"{event.name}.log", "a") as f:
+	with open(f"/home/ubuntu/bots/UkrComBot/{event.name}.log", "a") as f:
 		f.write(f"{callback.message.date} - {callback.from_user.username} ({callback.from_user.id}) booked\n")
 		f.flush()
 

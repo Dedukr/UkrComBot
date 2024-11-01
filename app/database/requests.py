@@ -5,11 +5,11 @@ from app.database.models import User, Event
 from sqlalchemy import select, update, delete
 import config
 
-async def set_user(message, tg_id, email):
+async def set_user(message, tg_id, username):
     async with async_session() as session:
         user = await session.scalar(select(User).where(User.tg_id == tg_id))
         if not user:
-            session.add((User(tg_id=tg_id, email=email)))
+            session.add((User(tg_id=tg_id, username=username)))
             await session.commit()
             await message.bot.send_message(config.ADMIN, text=f"New Customer {message.from_user.username} ({message.from_user.full_name})")
 
