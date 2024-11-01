@@ -56,7 +56,7 @@ async def book_attendance(callback: CallbackQuery):
 	await callback.message.bot.send_message(config.ADMIN,
 	                                        f"@{callback.from_user.username} ({callback.from_user.full_name})\nBooked a ticket for {event.name}!")
 	with open(f"{event.name}.log", "a") as f:
-		f.write(f"{callback.message.date} - {callback.from_user.username} booked\n")
+		f.write(f"{callback.message.date} - {callback.from_user.username} ({callback.from_user.id}) booked\n")
 		f.flush()
 
 	await callback.message.answer("Успішно заброньовано✅\nЗустрінемось на івенті!")

@@ -1,5 +1,4 @@
 aiogram
 stripe
-dotenv
 SQLAlchemy
 asyncpg
