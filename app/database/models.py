@@ -1,6 +1,7 @@
 from sqlalchemy import BigInteger, String, ForeignKey, LargeBinary, DateTime
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
+from typing import List, Optional
 from config import SQLAlCHEMY_URL
 
 engine = create_async_engine(url=SQLAlCHEMY_URL)
@@ -19,7 +20,7 @@ class User(Base):
 	tg_id = mapped_column(BigInteger)
 	username: Mapped[str] = mapped_column(String)
 	email:Mapped[str]=mapped_column(String, nullable=True)
-	my_events:Mapped[list["Event"]]=relationship(
+	my_events:Mapped[Optional[List["Event"]]]=relationship(
 		back_populates="people",
 		secondary="participants"
 	)
@@ -37,7 +38,7 @@ class Event(Base):
 	date = mapped_column(DateTime)
 	available: Mapped[int] = mapped_column()
 	participants: Mapped[int] = mapped_column(insert_default=0)
-	people:Mapped[list["User"]]=relationship(
+	people:Mapped[Optional[List["User"]]]=relationship(
 		back_populates="my_events",
 		secondary="participants"
 	)

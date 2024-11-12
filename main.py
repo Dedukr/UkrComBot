@@ -11,12 +11,12 @@ from app.database.models import asyncmain
 async def main():
 	await asyncmain()
 	# Initialize bot, dispatcher, and routers
-	bot = Bot(config.TOKEN)
+	bot = Bot(config.TOKEN_TEST)
 	dp = Dispatcher(storage=MemoryStorage())
 	try:
 
-		logging.basicConfig(level=logging.INFO, filename="/home/ubuntu/bots/UkrComBot/UkrComBot.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-		# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		# logging.basicConfig(level=logging.INFO, filename="/home/ubuntu/bots/UkrComBot/UkrComBot.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 		stripe.api_key = config.STRIPE_API
 		# Include ticket-related router
