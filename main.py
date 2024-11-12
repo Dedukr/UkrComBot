@@ -15,15 +15,15 @@ async def main():
 	dp = Dispatcher(storage=MemoryStorage())
 	try:
 
-		# logging.basicConfig(level=logging.INFO, filename="/home/ubuntu/bots/UkrComBot/UkrComBot.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-		logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		logging.basicConfig(level=logging.INFO, filename="/home/ubuntu/bots/UkrComBot/UkrComBot.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 		stripe.api_key = config.STRIPE_API
 		# Include ticket-related router
 		dp.include_router(tickets_handlers.ticket_router)
 		# Include the router in the dispatcher
 		dp.include_router(handlers.router)
-		await bot.send_message(config.DEV, "Bot started")
+		await bot.send_message(config.ADMIN, "Bot started")
 		await dp.start_polling(bot)
 	finally:
 		await bot.session.close()  # Close the bot session to avoid issues
