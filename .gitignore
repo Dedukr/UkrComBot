@@ -5,7 +5,7 @@
 config.py
 log.txt
 tickets.py
-main2.py
+test_main.py
 
 
 __pycache__/
