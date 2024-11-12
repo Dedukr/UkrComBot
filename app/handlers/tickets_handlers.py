@@ -43,8 +43,8 @@ async def event_details(callback: CallbackQuery):
 	event = await rq.get_detailed_event(event_id)
 	await callback.message.answer_photo(event.poster)
 	await callback.message.answer(event.name)
-	if event.price:
-		await callback.message.answer(text=f"{event.price}£")
+	if event.price or event.payment_link:
+		await callback.message.answer(text=f"Price: £{event.price}")
 		await callback.message.answer(text=event.description,
 		                              reply_markup=await kb.get_payment(event_id, callback.from_user.id))
 	else:

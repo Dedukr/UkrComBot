@@ -13,7 +13,7 @@ async def set_user(message, tg_id, username):
 			session.add((User(tg_id=tg_id, username=username)))
 			await session.commit()
 			await message.bot.send_message(chat_id=config.ADMIN,
-			                               text=f"New Customer {message.from_user.username} ({message.from_user.full_name})")
+			                               text=f"New Customer @{message.from_user.username} ({message.from_user.full_name})")
 
 
 async def get_current_events():
