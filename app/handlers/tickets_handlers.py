@@ -24,6 +24,7 @@ class TicketStates(StatesGroup):
 async def events(message: Message):
     current_events = await rq.get_current_events()
     if current_events:
+        await message.answer(current_events)
         for event in current_events:
             await message.answer_photo(photo=event.poster, reply_markup=kb.details(event.id))
     else:

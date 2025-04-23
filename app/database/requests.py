@@ -23,7 +23,7 @@ async def get_current_events():
         result = await session.execute(
             select(Event).where(Event.date > datetime.datetime.now())
         )
-        return result.all()
+        return result.scalars().all()
 
 
 async def get_detailed_event(event_id: int):
