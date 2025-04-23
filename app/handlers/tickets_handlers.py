@@ -23,9 +23,9 @@ class TicketStates(StatesGroup):
 @ticket_router.message(Command("events"))
 async def events(message: Message):
     current_events = await rq.get_current_events()
-    if current_events.one_or_none():
+    if current_events:
         for event in current_events:
-        	await message.answer_photo(photo=event.poster, reply_markup=kb.details(event.id))
+            await message.answer_photo(photo=event.poster, reply_markup=kb.details(event.id))
     else:
         await message.answer("Ми зараз активно працюємо над створенням нових незабутніх івентів для вас")
         await message.answer("Слідкуйте за нами шоб дізнатися більше", reply_markup=kb.get_follow_keyboard())
@@ -46,7 +46,7 @@ async def event_details(callback: CallbackQuery):
 	if event.price or event.payment_link:
 		await callback.message.answer(text=f"Price: £{event.price}")
 		await callback.message.answer(text=event.description,
-		                              reply_markup=await kb.get_payment(event_id, callback.from_user.id))
+									  reply_markup=await kb.get_payment(event_id, callback.from_user.id))
 	else:
 		await callback.message.answer(event.description, reply_markup=kb.register_me(event_id))
 
