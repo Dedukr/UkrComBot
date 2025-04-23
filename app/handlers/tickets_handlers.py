@@ -22,13 +22,13 @@ class TicketStates(StatesGroup):
 
 @ticket_router.message(Command("events"))
 async def events(message: Message):
-	current_events = await rq.get_current_events()
-	if current_events:
-		for event in current_events:
-			await message.answer_photo(photo=event.poster, reply_markup=kb.details(event.id))
-	else:
-		await message.answer("Ми зараз активно працюємо над створенням нових незабутніх івентів для вас")
-		await message.answer("Слідкуйте за нами шоб дізнатися більше", reply_markup=kb.get_follow_keyboard())
+    current_events = await rq.get_current_events()
+    if current_events.one_or_none():
+        for event in current_events:
+        	await message.answer_photo(photo=event.poster, reply_markup=kb.details(event.id))
+    else:
+        await message.answer("Ми зараз активно працюємо над створенням нових незабутніх івентів для вас")
+        await message.answer("Слідкуйте за нами шоб дізнатися більше", reply_markup=kb.get_follow_keyboard())
 
 
 @ticket_router.message(F.text == "Events")
